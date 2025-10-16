@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Chat with Historical Figures</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 600px; margin: 20px auto; }
+    #chat { border: 1px solid #ccc; padding: 10px; height: 400px; overflow-y: auto; margin-bottom: 10px; }
+    .msg { margin: 5px 0; }
+    .user { font-weight: bold; color: blue; }
+    .assistant { font-weight: bold; color: green; }
+    .system { font-style: italic; color: gray; }
+    #controls { display: flex; gap: 5px; }
+    #message { flex: 1; }
+    pre, code {
+  background: #f4f4f4;
+  padding: 4px 6px;
+  border-radius: 4px;
+  font-family: monospace;
+}
+pre {
+  overflow-x: auto;
+}
+.typing {
+  font-style: italic;
+  color: gray;
+  margin: 5px 0;
+}
+
+  </style>
+</head>
+<body>
+  <h2>Chat with Historical Figures</h2>
+
+  <label for="figure">Choose a figure:</label>
+  <select id="figure">
+    <option value="Marcus Aurelius">Marcus Aurelius</option>
+    <option value="Epictetus">Epictetus</option>
+    <option value="Seneca">Seneca</option>
+    <option value="Zeno of Citium">Zeno of Citium</option>
+    <option value="Cleanthes">Cleanthes</option>
+    <option value="Chrysippus">Chrysippus</option>
+    <option value="AI Robot">AI Robot</option>
+    <option value="Comedian">Comedian</option>
+    <option value="Bro">Bro</option>
+    <option value="Pirate">Pirate</option>
+    <option value="GirlyBestie">GirlyBestie</option>
+    <option value="GymBro">GymBro</option>
+    <option value="FlirtyGirl">FlirtyGirl</option>
+    <option value="Girlfriend">Girlfriend</option>
+
+
+  </select>
+
+  <div id="chat"></div>
+
+  <div id="controls">
+    <input type="text" id="message" placeholder="Type your message...">
+    <button id="send">Send</button>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script>
+    const chatBox = document.getElementById("chat");
+    const messageInput = document.getElementById("message");
+    const sendBtn = document.getElementById("send");
+    const figureSelect = document.getElementById("figure");
+
+    function appendMessage(role, text) {
+      const div = document.createElement("div");
+      div.classList.add("msg");
+      if (role === "user") div.innerHTML = `<span class="user">You:</span><br> ${text}`;
+      else if (role === "assistant") div.innerHTML = `<span class="assistant">${figureSelect.value}:</span>` + marked.parse(text); // ✅ render markdown to HTML
+      else div.innerHTML = `<span class="system">System:</span> ${text}`;
+      chatBox.appendChild(div);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    async function sendMessage() {
+      const msg = messageInput.value.trim();
+      if (!msg) return;
+
+      appendMessage("user", msg);
+      messageInput.value = "";
+
+      // Add typing indicator
+      const typingDiv = document.createElement("div");
+      typingDiv.classList.add("typing");
+      typingDiv.innerText = `${figureSelect.value} is typing...`;
+      chatBox.appendChild(typingDiv);
+      chatBox.scrollTop = chatBox.scrollHeight;
+
+
+      const response = await fetch("http://127.0.0.1:5000/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          message: msg,
+          figure: figureSelect.value
+        })
+      });
+
+      const data = await response.json();
+       // Remove typing indicator
+      chatBox.removeChild(typingDiv);
+
+
+      appendMessage("assistant", data.response);
+    }
+
+    sendBtn.addEventListener("click", sendMessage);
+    messageInput.addEventListener("keydown", e => {
+      if (e.key === "Enter") sendMessage();
+    });
+  </script>
+</body>
+</html>
