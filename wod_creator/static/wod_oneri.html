@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workout of the Day</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Use Inter font from Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="/static/wod.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white min-h-screen flex items-center justify-center p-4 sm:p-6 lg:p-8">
+
+    <!-- Main content container -->
+    <div class="w-full max-w-2xl mx-auto flex flex-col items-center">
+
+        <!-- Button to generate WOD -->
+        <button onclick="generate()" id="generateButton" class="w-full sm:w-auto px-8 py-4 bg-lime-500 hover:bg-lime-600 text-gray-900 font-bold text-lg rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 mb-8 focus:outline-none focus:ring-4 focus:ring-lime-500 focus:ring-opacity-50">
+            Generate WOD
+        </button>
+
+        <!-- WOD display container -->
+        <div id="wodContainer" class="bg-gray-800 p-6 sm:p-8 rounded-xl shadow-2xl w-full">
+            <!-- WOD title section -->
+            <div class="text-center mb-4">
+                <h2 class="text-4xl sm:text-5xl font-bold text-lime-400 mb-2" id="wodTitle"></h2>
+                <div class="w-24 h-1 bg-lime-400 mx-auto rounded-full"></div>
+            </div>
+
+            <!-- WOD movements section -->
+            <span id="resultSpan"></span>
+            <div id="wodMovements" class="text-gray-300 text-base sm:text-lg leading-relaxed" id="myOutput">
+                <p class="mb-2" id="rounds"></p>
+                <ul class="list-disc list-inside space-y-1" id="myList">
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
