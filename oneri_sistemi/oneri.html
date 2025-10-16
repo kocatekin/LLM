@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AI Excuse Generator</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen flex items-center justify-center p-4">
+  <div class="bg-white shadow-2xl rounded-2xl p-8 max-w-xl w-full">
+    <h2 class="text-3xl font-bold text-center mb-6">🎭 AI Excuse Generator</h2>
+
+    <div class="mb-4">
+      <label for="topic" class="block font-semibold mb-2">📚 Choose a topic:</label>
+      <select id="topic" class="w-full p-3 border rounded-lg text-lg">
+        <option value="not doing my homework">📓 Homework</option>
+        <option value="being late for work">💼 Late for Work</option>
+        <option value="missing a meeting">📅 Missed a Meeting</option>
+        <option value="forgetting to reply to a message">📨 Didn't Reply</option>
+        <option value="not cleaning my room">🧹 Didn’t Do Chores</option>
+        <option value="not paying my bills">💸 Didn’t Pay Bills</option>
+      </select>
+    </div>
+
+    <div class="mb-4">
+      <label for="tone" class="block font-semibold mb-2">🎭 Choose a tone:</label>
+      <select id="tone" class="w-full p-3 border rounded-lg text-lg">
+        <option value="funny">😂 Funny</option>
+        <option value="believable">🤔 Believable</option>
+        <option value="absurd">😵 Absurd</option>
+        <option value="clever">🧠 Clever</option>
+        <option value="magical">🦄 Magical</option>
+        <option value="chaotic">🔥 Chaotic</option>
+      </select>
+    </div>
+
+    <button onclick="generateExcuse()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-xl transition duration-300 text-lg">✨ Generate Excuse</button>
+
+    <div id="result" class="mt-6 p-4 bg-indigo-50 border border-indigo-200 rounded-lg text-lg whitespace-pre-wrap min-h-[60px]"></div>
+  </div>
+
+  <script>
+    async function generateExcuse() {
+      document.getElementById('result').innerText = "Loading...";
+      const topic = document.getElementById('topic').value;
+      const tone = document.getElementById('tone').value;
+      console.log(topic, tone);
+
+      const prompt = `Give a ${tone} excuse for ${topic}. Make it short (1-2 sentences).`;
+
+      const response = await fetch('http://localhost:5000/generate', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ prompt })
+      });
+      console.log(response);
+
+      const data = await response.json();
+      console.log(data);
+      document.getElementById('result').innerText = data || 'No excuse generated.';
+    }
+  </script>
+</body>
+</html>
