@@ -12,7 +12,7 @@
 
 <h1>AI Application</h1>
 
-<textarea id="prompt" placeholder="Write something..."></textarea>
+<textarea id="user_prompt" placeholder="Write something..."></textarea>
 <br>
 <button onclick="sendRequest()">Send</button>
 
@@ -21,12 +21,12 @@
 
 <script>
 function sendRequest() {
-    const prompt = document.getElementById("prompt").value;
+    const user_prompt = document.getElementById("user_prompt").value;
 
     fetch("/api/ask", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt })
+        body: JSON.stringify({ user_prompt })
     })
     .then(r => r.json())
     .then(data => {
