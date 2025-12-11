@@ -1,0 +1,10 @@
+Generate one 'Daily NPC Encounter'.
+
+Include:
+- A single line of dialogue (funny, cryptic, or weird)
+Style: short, charming, slightly absurd.
+
+Output:
+<name>: <single line of dialogue>
+
+Do not give any preamble.
