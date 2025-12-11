@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dream Interpreter</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-6">
+
+  <div class="bg-white w-full max-w-2xl shadow-lg rounded-xl p-8 space-y-6">
+
+    <h1 class="text-3xl font-bold text-gray-800 text-center">
+      Dream Interpreter
+    </h1>
+
+    <!-- FORM SECTION -->
+    <form method="POST" action="/ai" class="space-y-4">
+
+      <div>
+        <label class="block text-gray-700 font-medium mb-2">
+          Describe Your Dream
+        </label>
+
+        <textarea 
+          name="dream"
+          class="w-full border border-gray-300 rounded-lg p-4 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+          rows="4"
+          placeholder="Describe your dream here..."
+          required
+        ></textarea>
+      </div>
+
+      <button 
+        type="submit"
+        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition"
+      >
+        Interpret Dream
+      </button>
+    </form>
+
+    <!-- MOCK OUTPUT (remove when server-generated output is used) -->
+    <div class="bg-blue-50 border border-blue-200 p-6 rounded-lg">
+      <h2 class="text-xl font-semibold text-blue-900 mb-2">Interpretation (Mock)</h2>
+      <p class="text-blue-900 leading-relaxed">
+        The presence of water often represents emotion and intuition. Dreaming of a rising tide suggests that 
+        your subconscious is pushing important feelings to the surface, urging you to acknowledge them.
+      </p>
+
+      <p class="text-blue-900 mt-3 leading-relaxed">
+        This may indicate a period of emotional growth or the need to express something you have been holding inside.
+      </p>
+    </div>
+
+    <!-- MOCK TAGS -->
+    <div class="flex flex-wrap gap-2">
+      <span class="bg-gray-200 px-3 py-1 rounded-full text-sm text-gray-700">Emotion</span>
+      <span class="bg-gray-200 px-3 py-1 rounded-full text-sm text-gray-700">Intuition</span>
+      <span class="bg-gray-200 px-3 py-1 rounded-full text-sm text-gray-700">Awareness</span>
+    </div>
+
+  </div>
+
+</body>
+</html>
