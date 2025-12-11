@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Tailwind Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Optional: Add a simple keyframe animation for the button hover effect */
+        @keyframes pulse-ring {
+            0% {
+                opacity: 0.5;
+                transform: scale(0.9);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(1.5);
+            }
+        }
+
+        .fancy-button-container:hover .fancy-ring {
+            animation: pulse-ring 1s ease-out infinite;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white min-h-screen flex items-center justify-center p-4">
+
+    <div class="text-center max-w-4xl">
+
+        <h1 class="text-7xl sm:text-8xl md:text-9xl font-extrabold tracking-tight mb-8 leading-tight">
+            <span class="block bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400">
+                {{data["name"]}}
+            </span>
+        </h1>
+
+         <p class="text-xl sm:text-2xl font-medium mb-12 text-gray-600 dark:text-gray-400">
+            {{data["description"]}}
+        </p>
+
+        <div class="inline-block relative fancy-button-container">
+            <span class="absolute inset-0 w-full h-full bg-blue-400 rounded-full opacity-0 fancy-ring"></span>
+
+            <button onclick="run()" class="relative px-10 py-4 text-lg font-bold rounded-full shadow-lg transition-all duration-300
+                           bg-blue-600 hover:bg-blue-700 text-white
+                           transform hover:scale-105 active:scale-95
+                           shadow-blue-500/50 hover:shadow-xl hover:shadow-blue-600/70
+                           focus:outline-none focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800">
+                Generate!!
+            </button>
+        </div>
+
+    </div>
+
+</body>
+<script>
+    function run() {
+        console.log("i am working");
+        window.location.href = "http://localhost:5000/ai";
+    }
+</script>
+</html>

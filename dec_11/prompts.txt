@@ -1,0 +1,4 @@
+i am a masters student studying computer engineering. i want you to create a random name and description for my future project. i want it to be fun. create a json. nothing more. 
+
+output example:
+{"name": "...", "description": "..."}
