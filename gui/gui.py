@@ -3,18 +3,12 @@ from tkinter import ttk
 from run_ai import ask_ai
 
 def generate_text():
-    prompt = """
-      Generate one 'Daily NPC Encounter'.
-
-      Include:
-      - A single line of dialogue (funny, cryptic, or weird)
-      Style: short, charming, slightly absurd.
-
-      Output:
-      <name>: <single line of dialogue>
-
-      Do not give any preamble.
-      """
+    f = open("prompt.txt","r")
+    lines = f.readlines()
+    prompt = ""
+    for line in lines:
+        prompt += line
+        
     res = ask_ai(prompt)
 
     output_box.config(state="normal")
